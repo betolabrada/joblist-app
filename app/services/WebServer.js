@@ -5,10 +5,11 @@ const config = require('../config/WebServer.js');
 const morgan = require('morgan');
 
 let httpServer;
+let app;
 
 function initialize() {
     return new Promise((resolve, reject) => {
-        const app = express();
+        app = express();
         app.use(morgan('combined'));
         app.use(express.json());
         httpServer = http.createServer(app);
@@ -46,3 +47,4 @@ function close() {
 
 module.exports.initialize = initialize;
 module.exports.close = close;
+module.exports.app = app;

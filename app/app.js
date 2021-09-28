@@ -4,6 +4,7 @@ const webServer = require('./services/WebServer.js');
 const database = require('./services/Database.js');
 
 process.env.UV_THREADPOOL_SIZE = dbConfig.pool.connectionLimit + 4;
+let app = webServer.app;
 
 async function startup(){
     console.log("Initializing database connection...");
@@ -70,3 +71,7 @@ process.on('uncaughtException', (err) => {
 })
 
 startup();
+
+module.exports.startup = startup;
+module.exports.shutdown = shutdown;
+module.exports.app = app;
